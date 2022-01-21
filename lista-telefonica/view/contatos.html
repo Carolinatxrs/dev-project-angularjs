@@ -1,0 +1,71 @@
+<div class="jumbotron">
+  <h3 ng-bind="app"></h3>
+
+  <ui-accordions>
+    <ui-accordion title="Accordion 1">
+      Lorem Ipsum é simplesmente um texto fictício da indústria tipográfica e de impressão. Lorem Ipsum tem sido o
+      texto
+      fictício padrão da indústria desde os anos 1500, quando um impressor desconhecido pegou uma cozinha de tipos e
+      embaralhou-a para fazer um livro de espécimes de tipos. Ele sobreviveu não apenas cinco séculos, mas também o
+      salto para a composição eletrônica, permanecendo essencialmente inalterado.
+    </ui-accordion>
+
+    <ui-accordion title="Accordion 2">
+      Lorem Ipsum é simplesmente um texto fictício da indústria tipográfica e de impressão. Lorem Ipsum tem sido o
+      texto
+      fictício padrão da indústria desde os anos 1500, quando um impressor desconhecido pegou uma cozinha de tipos e
+      embaralhou-a para fazer um livro de espécimes de tipos. Ele sobreviveu não apenas cinco séculos, mas também o
+      salto para a composição eletrônica, permanecendo essencialmente inalterado.
+    </ui-accordion>
+
+    <div ui-accordion title="Accordion 3">
+      Lorem Ipsum é simplesmente um texto fictício da indústria tipográfica e de impressão. Lorem Ipsum tem sido o
+      texto
+      fictício padrão da indústria desde os anos 1500, quando um impressor desconhecido pegou uma cozinha de tipos e
+      embaralhou-a para fazer um livro de espécimes de tipos. Ele sobreviveu não apenas cinco séculos, mas também o
+      salto para a composição eletrônica, permanecendo essencialmente inalterado.
+    </div>
+  </ui-accordions>
+  <hr>
+
+  <!-- <div ui-alert title="Ops, aconteceu um problema!">
+    {{message}}
+  </div> -->
+
+  <input type="text" class="form-control" ng-model="criterioDeBusca"
+    ng-model-options="{updateOn: 'default blur', debounce:{default:500, blur:0}}"
+    placeholder="O que você está buscando?">
+  <table ng-show="contatos.length > 0" class="table table-striped">
+
+    <tr>
+      <th></th>
+      <th>Serial</th>
+      <th><a href="" ng-click="ordenarPor('nome')">Nome</a></th>
+      <th><a href="" ng-click="ordenarPor('telefone')">Telefone</a></th>
+      <th>Operadora</th>
+      <th>Preço</th>
+      <th>Data</th>
+      <th></th>
+    </tr>
+    <!--ng-repeat mesma ideia do foreach-->
+    <tr ng-class="{'selecionado negrito': contato.selecionado}"
+      ng-repeat="contato in contatos | filter:criterioDeBusca | orderBy: criterioDeOrdenacao:direcaoDaOrdenacao">
+      <td><input type="checkbox" ng-model="contato.selecionado" ng-click="verificarContatoSelecionado(contatos)"></td>
+      <td ng-bind="contato.serial"></td>
+      <td><a href="#/detalhesContato/{{contato.id}}">{{::contato.nome}}</a></td>
+      <!--| ellipsis: 15 ng-bind = "contato.nome" -->
+      <td ng-bind="contato.telefone"></td>
+      <td ng-bind="contato.operadora.nome | lowercase"></td>
+      <td ng-bind="contato.operadora.precoComImposto | currency"></td>
+      <td ng-bind="contato.data | date:'EEE dd/MM/yyyy'"></td>
+      <td>
+        <div style="width: 20px; height: 20px;" ng-style="{'background-color': contato.cor}"></div>
+      </td>
+    </tr>
+
+  </table>
+  <hr>
+  <a class="btn btn-primary btn-block" href="#/novoContato">Novo Contato</a>
+  <button type="button" class="btn btn-danger btn-block" ng-click="apagarContatos(contatos)"
+    ng-if="hasContatoSelecionado">Apagar Contatos</button>
+</div>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="helloWorld">
+
+<head>
+  <title>Hello World</title>
+  <script src="lib/angular/angular.js"></script>
+  <script>
+    /*cria o módulo
+    colchete é a importação/injeção de novos módulos*/
+    angular.module("helloWorld", []);
+    /*localiza o módulo, criando controller
+    scope ta sendo injetado como dependência pra dentro do controller*/
+    angular.module("helloWorld").controller("helloWorldCtrl", function ($scope) {
+      $scope.message = "Hello World!";
+    });   
+  </script>
+  <!-- 
+    ou pegar o retorno da criação do módulo numa var local
+    que se usa para registrar componentes como controller,
+    contudo ela fica exposta no escopo global.
+    <script>
+    var app = angular.module("helloWorld", []);
+    app.controller("helloWorldCtrl", function ($scope) {
+      $scope.message = "Hello World!";
+    });   
+  </script>
+  -->
+
+</head>
+<!-- A view não é um arquivo, 
+  mas sim um local onde se pode colocar o atributo ng-controller.
+  Ela pode ser adicionada na tag body
+  ou em outra tag específica do html.
+  Logo a view é um conjunto de tags 
+  e pode existir no mesmo html mais de uma ng-controller
+  criando varias views associadas a um controller diferente.
+-->
+
+<body>
+  <div ng-controller="helloWorldCtrl">
+    {{message}}
+  </div>
+</body>
+
+</html>
